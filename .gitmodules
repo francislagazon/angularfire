@@ -1,0 +1,6 @@
+[submodule "enhancer"]
+	path = enhancer
+	url = https://github.com/thruthesky/enhancer.git
+[submodule "src/enhancer"]
+	path = src/enhancer
+	url = https://github.com/thruthesky/enhancer

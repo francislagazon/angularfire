@@ -1,0 +1,159 @@
+
+/**
+ *
+ *      U T I L I T I E S
+ *
+ */
+.box-shadow {
+  box-shadow: 0 1px 1px rgba( 0, 0, 0, 0.1 );
+}
+
+// extention of mt-*
+.margin-top-4 { margin-top: 4em; }
+.margin-top-5 { margin-top: 5em; }
+.margin-top-6 { margin-top: 6em; }
+
+
+.list-style-none {
+  @include list-style-none();
+}
+
+.list-float-left {
+  @include list-float-left();
+}
+
+
+// For container, it is not easy to remove all spaces. Use this to remove all spaces of container.
+.no-space {
+  margin: 0!important;
+  padding: 0!important;
+  width: 100%;
+  & > .row {
+    margin: 0!important;
+    padding: 0!important;
+    & > [class^="col"] {
+      margin: 0!important;
+      padding: 0!important;
+    }
+  }
+}
+
+//
+.pointer {
+  cursor: pointer;
+}
+
+.pointers {
+  &>div, &>span, &>li {
+    cursor: pointer;
+  }
+}
+
+
+// butons
+.buttons {
+  & > div, & > span {
+    cursor: pointer;
+  }
+}
+
+
+//
+.z-index-high {
+  z-index: 987654321;
+}
+.z-index-medium {
+  z-index: 87654321;
+}
+.z-index-low {
+  z-index: 7654321;
+}
+.z-index {
+  z-index: 654321;
+}
+
+
+// borders.
+// https://v4-alpha.getbootstrap.com/utilities/borders/
+//
+// bb-x: border bottom with {x}px.
+// @see color.scss for border colors.
+.bb-1 {
+  border-bottom: 1px solid;
+}
+.bb-2 {
+  border-bottom: 1px solid;
+}
+
+
+// spacing
+// @use-case: <ul class="p-2s">...</ul>
+.p-1s {
+  &>div, &>span, &>li {
+    padding: .25em;
+  }
+}.p-2s {
+  &>div, &>span, &>li {
+    padding: .5em;
+  }
+}
+
+/**
+ * margin.
+ */
+@each $size in 6, 7, 8, 9 {
+  .ml-#{$size} { margin-left: #{$size}em; }
+  .mr-#{$size} { margin-right: #{$size}em; }
+  .mx-#{$size} { margin-left: #{$size}em; margin-right: #{$size}em; }
+}
+
+/**
+ *
+ * max-width by em;
+ * h-25, w-25 up exists in bootstrap;
+ * mw-25 exsits on bootstrap for 25% of max width.
+ */
+@each $size in 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24 {
+  .mw-#{$size} { max-width: #{$size}em; }
+  .mh-#{$size} { max-height: #{$size}em; }
+  .w-#{$size} { width: #{$size}em; }
+  .h-#{$size} { height: #{$size}em; }
+}
+.mh-auto { max-height: none; }
+.h-auto { height: auto; }
+.of-hidden {
+  overflow: hidden;
+  overflow-x: hidden;
+  overflow-y: hidden;
+}
+
+
+.t-0 {
+  top: 0;
+}
+.t-50 {
+  top: 50%;
+}
+.l-0 {
+  left: 0;
+}
+.l-50 {
+  left: 50%;
+}
+.r-0 {
+  right: 0;
+}
+.r-50 {
+  right: 50%;
+}
+.b-0 {
+  bottom: 0;
+}
+
+.b-50 {
+  bottom: 50%;
+}
+
+.border-box {
+    box-sizing: border-box!important;
+}

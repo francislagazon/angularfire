@@ -1,0 +1,75 @@
+<form [formGroup]="form" novalidate>
+    <div class="row">
+        <div class="col-md-3"></div>
+        <div class="col-md-6">
+            <h3>User Registration</h3>
+            <hr>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-3"></div>
+        <div class="col-md-6">
+            <div class="form-group">
+                <label class="sr-only" for="email">E-Mail Address</label>
+                <div class="input-group mb-2 mr-sm-2 mb-sm-0">
+                    <div class="input-group-addon" style="width: 2.6rem"><i class="fa fa-at"></i></div>
+                    <input type="text" formControlName="email" name="email" class="form-control" id="email"
+                            placeholder="you@example.com" required>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-3"></div>
+        <div class="col-md-6">
+            <div class="form-group">
+                <label class="sr-only" for="password">Password</label>
+                <div class="input-group mb-2 mr-sm-2 mb-sm-0">
+                    <div class="input-group-addon" style="width: 2.6rem"><i class="fa fa-key"></i></div>
+                    <input type="password" formControlName="password" name="password" class="form-control" id="password"
+                            placeholder="Password" required>      
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-3"></div>
+        <div class="col-md-6">
+            <div class="form-group">
+                <label class="sr-only" for="password">Repeat Password</label>
+                <div class="input-group mb-2 mr-sm-2 mb-sm-0">
+                    <div class="input-group-addon" style="width: 2.6rem"><i class="fa fa-key"></i></div>
+                    <input type="password" formControlName="password2" name="password2" class="form-control" id="password2"
+                            placeholder="Repeat Password" required>                                   
+                </div>
+                <div class="clearfix" *ngIf="form.controls.password2.touched">
+                        <div *ngIf="form.hasError('mismatchedPasswords')" class="text-danger text-right">Passwords do not match</div>
+                    </div> 
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-3"></div>
+        <div class="col-md-6">
+            <div class="form-group">
+                <label class="sr-only" for="password">Role</label>
+                <div class="input-group mb-2 mr-sm-2 mb-sm-0">
+                    <div class="input-group-addon" style="width: 2.6rem"><i class="fa fa-user-o"></i></div>  
+                    <select formControlName="role" name="role" class="form-control" id="role">
+                        <option value="Adminstrator">Administrator</option>
+                        <option value="User">User</option>
+                        <option value="Guest">Guest</option>
+                    </select>              
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row" style="padding-top: 1rem">
+        <div class="col-md-3"></div>
+        <div class="col-md-6">
+            <button type="submit" class="btn btn-primary" (click)="onSubmit()" [disabled]="!form.valid">
+                <i class="fa fa-plus"></i> Register
+            </button>
+        </div>
+    </div>
+</form>

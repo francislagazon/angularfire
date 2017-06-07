@@ -1,0 +1,47 @@
+/**
+
+    Structure:
+
+        .enhance-modal
+            .modal-dialog
+                .modal-content
+                    .modal-header
+                    .modal-body
+                        .input-group
+                            .input-group-addon
+                            .form-control
+
+ */
+
+.enhance-modal {
+    .modal-dialog {
+        .modal-content {
+            border-radius: 0;
+
+
+        background-color: transparent;
+            .modal-header {
+                border-top: 1.6rem solid #4b5d6f;
+                background-color: white;
+                color: black;
+            }
+
+            .modal-body {
+                background-color: #f8f8f8;
+                .input-group {
+                    .input-group-addon, .form-control {
+                        padding: .8em;
+                        border: 0;
+                        border-radius: 0;
+                        border-color: white;
+                    }
+
+                    .input-group-addon {
+                        background-color: #8fa3ad;
+                        color: white;
+                    }
+                }
+            }
+        }
+    }
+}

@@ -1,0 +1,32 @@
+import {Injectable} from '@angular/core'
+import { AngularFireDatabase, FirebaseListObservable } from 'angularfire2/database';
+import * as firebase from 'firebase';
+
+import { Router } from '@angular/router';
+import { Observable } from 'rxjs/Observable';
+import 'rxjs/add/observable/fromPromise';
+
+@Injectable()
+
+export class ForumData {
+
+    category: FirebaseListObservable<any>;
+    sub: FirebaseListObservable<any>;
+    topic: FirebaseListObservable<any>
+
+    constructor(db: AngularFireDatabase) {
+        this.category = db.list('/category');
+        this.sub = db.list('/subcategory');
+        this.topic = db.list('/topics');
+    }
+
+    categoryAdd(info):Observable<any> {
+        let promise = this.category.push(info)
+        return Observable.fromPromise( promise );
+    }
+
+    categorySubAdd(info):Observable<any> {
+        let promise = this.category.push(info)
+        return Observable.fromPromise( promise );
+    }
+}

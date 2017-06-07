@@ -1,0 +1,27 @@
+<nav class="navbar navbar-toggleable-md navbar-inverse fixed-top bg-inverse">
+   <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+   <span class="navbar-toggler-icon"></span>
+   </button>
+   <div class="collapse navbar-collapse" id="navbarCollapse">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item">
+            <a href="/"><i class="fa fa-home fa-fw text-white fs-2rem mt-1" aria-hidden="true"></i></a>
+        </li> 
+        <li class="nav-item" *ngFor="let nav of navigation">
+            <a class="nav-link" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:true}" routerLink="{{nav.url}}" *ngIf="login">
+                {{nav.page}}
+            </a>
+        </li>
+      </ul>
+      <ul class="profile flex-row-reverse py-2 mb-0">
+          <li class="text-white p2 d-inline px-2">
+              Hi <span *ngIf="login; else guest">{{userEmail}}</span>
+          </li>
+          <li class="text-white p2 d-inline px-2" *ngIf="login"><a routerLink="/profile">Profile</a></li>
+          <li class="text-white p2 d-inline px-2" *ngIf="login"> <a (click)="btnLogout()">Logout</a></li>
+          <li class="text-white p2 d-inline px-2" *ngIf="!(login)"><a routerLink="/login">Login</a></li>
+          <li class="text-white p2 d-inline px-2" *ngIf="!(login)"><a routerLink="/register">Register</a></li>
+      </ul>
+      <ng-template #guest>Guest</ng-template>
+   </div>
+</nav>
