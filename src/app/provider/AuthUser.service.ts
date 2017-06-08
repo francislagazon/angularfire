@@ -11,6 +11,7 @@ import 'rxjs/add/observable/fromPromise';
 export class UserData {
     profileID: any = "";
     pageSession: boolean = false;
+    loggedin: string;
 
     users: FirebaseListObservable<any>;
     constructor(db: AngularFireDatabase) {

@@ -12,10 +12,10 @@ import { USERS_KEY_FORMAT, FORUM_KEY_FORMAT } from "./../../../provider/interfac
 
 @Component({
     selector: 'app-new-category',
-    templateUrl: './new.category.component.html'
+    templateUrl: './edit.category.component.html'
 })
 
-export class NewCategoryComponent {
+export class EditCategoryComponent {
 
     private userVar:USERS_KEY_FORMAT = <USERS_KEY_FORMAT>{};
     private forumVar : FORUM_KEY_FORMAT = <FORUM_KEY_FORMAT> {};
@@ -39,23 +39,22 @@ export class NewCategoryComponent {
             this.forumVar.forumId = params['forumId'] ? params['forumId'] : null;
             this.forumVar.catId = params['catId'] ? params['catId'] : null;
 
-            
-                db.database.ref().child('category/'+ this.forumVar.catId)
-                .once('value', u => {
-                    console.log(u.val().category);
-                    this.form.patchValue({
-                        forumId:            [u.val().forumID],
-                        categoryName:       [u.val().category],
-                        description:        [u.val().description],
-                        parent:             [u.val().parent]
-                    })
-                });   
-            
-                this.form.patchValue({
-                    forumId:            params['forumId']
-                })
-            
-            
+                this.userVar.userDetail = db.list('/category/'+ this.forumVar.catId )
+                    .subscribe(req =>  {
+                        console.log(req);
+                        for(let uIndex of req) {
+                            if(uIndex.$key == "category")       { this.forumVar.categoryName = uIndex.$value;    }
+                            if(uIndex.$key == "description")    { this.forumVar.description = uIndex.$value;       }
+                            if(uIndex.$key == "forumID")        { this.forumVar.forumId = uIndex.$value;     }
+                            if(uIndex.$key == "parent")         { this.forumVar.parent = uIndex.$value;        }
+                        }
+                        this.form.patchValue({
+                            forumId:        this.forumVar.forumId,
+                            categoryName:   this.forumVar.categoryName, 
+                            description:    this.forumVar.description, 
+                            parent:         this.forumVar.parent
+                        })
+                    }); 
         });
     }
     

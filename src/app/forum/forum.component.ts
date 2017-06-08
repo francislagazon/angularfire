@@ -8,6 +8,7 @@ import { AngularFireDatabase, FirebaseListObservable, FirebaseObjectObservable }
 import * as firebase from 'firebase';
 
 import { UserData } from './../provider/AuthUser.service';
+
 import { ForumData } from './../provider/Forum.service'
 
 import { USERS_KEY_FORMAT } from "./../provider/interface";
@@ -19,14 +20,24 @@ import { USERS_KEY_FORMAT } from "./../provider/interface";
 
 export class ForumComponent {
     
-    category: FirebaseListObservable<any>;
+    ob : Object = {};
 
-    constructor(private router: Router, db: AngularFireDatabase, private uData: UserData) {
+    constructor(private router: Router, db: AngularFireDatabase, private uData: UserData, private f: ForumData) {
         if(!uData.pageSession) {
             router.navigate(['/login']);
         }
 
-        this.category = db.list('/category');
+        db.database.ref().child('config')
+            .once('value', u => {
+                this.ob = u.val();
+            });   
     }
     
+    
+
+    get ObjectKeys() {
+        return Object.keys( this.ob );
+    }
+    
+
 }

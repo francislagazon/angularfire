@@ -8,15 +8,26 @@ import { DashboardComponent } from "./dashboard/dashboard.component";
 import { AdminComponent } from "./admin/admin.component";
 import { ForumComponent } from "./forum/forum.component";
 import { NavigationComponent } from "./navigation/nav.component";
-import { LoginComponent, RegisterComponent, ForgotPasswordComponent } from "./auth/auth.component";
-import { ProfileComponent, ProfileEditComponent } from "./profile/profile.component";
-import { UsersComponent, TrashComponent } from "./users/users.component";
+
+import { LoginComponent } from "./auth/component/login/login.component";
+import { RegisterComponent } from "./auth/component/register/register.component";
+import { ForgotPasswordComponent } from "./auth/component/forgot/forgot.component";
+
+import { ProfileComponent } from "./profile/profile.component";
+import { ProfileEditComponent } from "./profile/component/edit/profileEdit.component";
+
+import { UsersComponent } from "./users/users.component";
+import { TrashComponent } from "./users/component/trash/trash.component";
+
 import { CategoryComponent } from "./category/category.component";
 import { NewCategoryComponent } from "./category/component/new.category/new.category.component";
+import { EditCategoryComponent } from "./category/component/edit.category/edit.category.component";
 import { SubCategoryComponent } from "./category/component/sub.category/sub.category.component";
 import { NewSubCategoryComponent } from "./category/component/sub.category/new.sub.category/new.sub.category.component";
 
+import { NewConfigComponent } from './forum/component/new.config.component';
 
+import { ActionComponent } from "./action/action.component";
 
 import { PageNotFoundComponent } from "./404/404.component";
 
@@ -32,20 +43,25 @@ import { ForumData } from './provider/Forum.service'
 import { USERS_KEY_FORMAT } from "./provider/interface";
 
 const appRoutes:Routes = [
-  { path: "",                     component: DashboardComponent },
-  { path: "admin",                component: AdminComponent },
-  { path: "login",                component: LoginComponent },
-  { path: "register",             component: RegisterComponent },
-  { path: "forgot",               component: ForgotPasswordComponent },
-  { path: "users",                component: UsersComponent },
-  { path: "trash",                component: TrashComponent }, 
-  { path: "profile",              component: ProfileComponent },
-  { path: "users/edit/:userId",   component: ProfileEditComponent },
-  { path: "profile/edit/:userId", component: ProfileEditComponent },
-  { path: "category",             component: CategoryComponent },
-  { path: "category/new",         component: NewCategoryComponent },
-  { path: "category/new/:catId",  component: NewSubCategoryComponent },
-  { path: "forum",                component: ForumComponent }
+  { path: "",                                 component: DashboardComponent },
+  { path: "admin",                            component: AdminComponent },
+  { path: "login",                            component: LoginComponent },
+  { path: "register",                         component: RegisterComponent },
+  { path: "forgot",                           component: ForgotPasswordComponent },
+  { path: "users",                            component: UsersComponent },
+  { path: "trash",                            component: TrashComponent }, 
+  { path: "profile",                          component: ProfileComponent },
+  { path: "users/edit/:userId",               component: ProfileEditComponent },
+  { path: "profile/edit/:userId",             component: ProfileEditComponent },
+  { path: "category",                         component: CategoryComponent },
+  { path: "category/new/:forumId/:catId",     component: NewSubCategoryComponent },
+  { path: "category/new/:forumId",            component: NewCategoryComponent },
+  { path: "category/edit/:forumId/:catId",    component: EditCategoryComponent },
+  { path: "category/:forumId",                component: CategoryComponent },
+  { path: "category/:forumId/:catId",         component: SubCategoryComponent },
+  { path: "forum",                            component: ForumComponent },
+  { path: "forum/add",                        component: NewConfigComponent },
+  { path: "action",                           component: ActionComponent }
 ];
 
 @NgModule({
@@ -64,9 +80,12 @@ const appRoutes:Routes = [
     PageNotFoundComponent,
     CategoryComponent,
     NewCategoryComponent,
+    EditCategoryComponent,
     SubCategoryComponent,
     NewSubCategoryComponent,
-    ForumComponent
+    ForumComponent,
+    NewConfigComponent,
+    ActionComponent
   ],
   imports: [
     BrowserModule,

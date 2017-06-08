@@ -2,6 +2,11 @@
 
 body {
   padding-top: 4.5rem;
+  font-size:1em
+}
+a:hover {
+  text-decoration: none;
+  color: red
 }
 ul.user-listing,
 ul.nav-list {

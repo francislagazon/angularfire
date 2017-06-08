@@ -1,8 +1,8 @@
-<form [formGroup]="form">
+<form [formGroup]="form" enctype="multipart/form-data">
     <div class="row">
         <div class="col-md-3"></div>
         <div class="col-md-6">
-            <h6>Category: {{forumVar.name}}</h6>
+            <h3>New Category</h3>
             <hr>
         </div>
     </div>
@@ -10,11 +10,11 @@
         <div class="col-md-3"></div>
         <div class="col-md-6">
             <div class="form-group">
-                <label class="sr-only" for="password">Title</label>
+                <label class="sr-only" for="password">Name</label>
                 <div class="input-group mb-2 mr-sm-2 mb-sm-0">
                     <div class="input-group-addon" style="width: 2.6rem"><i class="fa fa-tag"></i></div>
-                    <input type="text" formControlName="SubcategoryName" name="SubcategoryName" class="form-control" id="SubcategoryName"
-                            placeholder="Title" required>
+                    <input type="text" formControlName="categoryName" name="categoryName" class="form-control" id="categoryName"
+                            placeholder="Category" required>
                 </div>
             </div>
         </div>
@@ -35,8 +35,8 @@
     <div class="row" style="padding-top: 1rem">
         <div class="col-md-3"></div>
         <div class="col-md-6">
-            <input type="hidden" formControlName="forumId" name="forumId" class="form-control" id="forumId" required />
-            <input type="hidden" formControlName="parent" name="parent" class="form-control" id="parent" required />
+            <input type="hidden" formControlName="forumId" name="forumId" class="form-control" id="forumId" required>
+            <input type="hidden" formControlName="parent" name="parent" class="form-control" id="parent" required>
             <button type="submit" class="btn btn-primary" (click)="onSubmit()" [disabled]="!form.valid">
                 <i class="fa fa-plus"></i> Save
             </button>

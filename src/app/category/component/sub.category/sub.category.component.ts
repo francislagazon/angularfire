@@ -22,33 +22,36 @@ export class SubCategoryComponent {
     private userVar:USERS_KEY_FORMAT = <USERS_KEY_FORMAT>{};
 
     form: FormGroup;
+    ob : Object = {};
+    
 
     constructor(private activatedRoute: ActivatedRoute, fb: FormBuilder, private router: Router, db: AngularFireDatabase, private uData: UserData, private fData: ForumData) {
         if(!uData.pageSession) {
             router.navigate(['/login']);
         }
-        
-
-        this.form = fb.group({
-            SubcategoryName:    ['', Validators.required],
-            description:        ['', Validators.required],
-            parent:             ['0', Validators.required]
-        });      
-
+            
         this.activatedRoute.params.subscribe((params: Params) => {
             this.forumVar.catId = params['catId'];
-            db.list('/category'+ this.forumVar.catId )
-                .subscribe(req =>  {    
-                    for(let uIndex of req) {
-                        if(uIndex.$key == "category")   { this.forumVar.name = uIndex.$value; }
-                    }
-                    this.form.patchValue({
-                        parent:      this.forumVar.catId
-                    })
-                });
+
+            db.database.ref().child('category')
+            .orderByChild('parent').equalTo(params['catId'])
+            .once('value', u => {
+                this.ob = u.val();
+            });
         });
+
     }
 
+    get ObjectKeys() {
+        if(this.ob) {
+            this.forumVar.noResult = false;
+            return Object.keys( this.ob );
+        } else {
+            this.forumVar.noResult = true
+        }
+        
+    }
+    
     onSubmit() {
         this.userVar.loading = true;
         let passData = {
@@ -60,6 +63,15 @@ export class SubCategoryComponent {
         .subscribe((success) => {
             this.userVar.loading = false;
             this.router.navigate(['/category']);
+        }, e =>console.log(e));
+    }
+
+    catDelete(id) {
+        this.userVar.loading = true;
+        this.fData.deleteCategory(id)
+        .subscribe((success) => {
+            this.userVar.loading = false;
+            this.router.navigate(['/action/']);
         }, e =>console.log(e));
     }
 }

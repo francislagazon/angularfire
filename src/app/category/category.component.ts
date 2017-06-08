@@ -18,28 +18,45 @@ import { USERS_KEY_FORMAT, FORUM_KEY_FORMAT } from "./../provider/interface";
 
 export class CategoryComponent {
 
+    private userVar:USERS_KEY_FORMAT = <USERS_KEY_FORMAT>{};
+    private forumVar : FORUM_KEY_FORMAT = <FORUM_KEY_FORMAT> {};
+
     category: FirebaseListObservable<any>;
     catListing: string;
 
     ob : Object = {};
-
-    constructor(private router: Router, db: AngularFireDatabase, private uData: UserData) {
+    fid: string;
+    constructor(private activatedRoute: ActivatedRoute, private router: Router, db: AngularFireDatabase, private uData: UserData, private fData: ForumData) {
         if(!uData.pageSession) {
             router.navigate(['/login']);
         }
-
-        this.category = db.list('/category');
         
-        db.database.ref().child('category')
-            .orderByChild('parent').equalTo('0')
+        this.activatedRoute.params.subscribe((params: Params) => {
+            this.forumVar.catId = params['forumId'];
+            this.fid = params['forumId']
+             db.database.ref().child('category')
+            .orderByChild('forumID').equalTo(this.forumVar.catId)
             .once('value', u => {
                 this.ob = u.val();
-            });                    
+            });   
+                
+        });
+
+                        
     }
 
-      get ObjectKeys() {
-          return Object.keys( this.ob );
-  }
+    catDelete(id) {
+        this.userVar.loading = true;
+        this.fData.deleteCategory(id)
+        .subscribe((success) => {
+            this.userVar.loading = false;
+            this.router.navigate(['/action/']);
+        }, e =>console.log(e));
+    }
+
+    get ObjectKeys() {
+        return Object.keys( this.ob );
+    }
 
 }
 

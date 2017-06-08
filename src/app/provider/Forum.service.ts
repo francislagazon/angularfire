@@ -12,12 +12,11 @@ export class ForumData {
 
     category: FirebaseListObservable<any>;
     sub: FirebaseListObservable<any>;
-    topic: FirebaseListObservable<any>
+    config: FirebaseListObservable<any>
 
     constructor(db: AngularFireDatabase) {
         this.category = db.list('/category');
-        this.sub = db.list('/subcategory');
-        this.topic = db.list('/topics');
+        this.config = db.list('/config');
     }
 
     categoryAdd(info):Observable<any> {
@@ -28,5 +27,15 @@ export class ForumData {
     categorySubAdd(info):Observable<any> {
         let promise = this.category.push(info)
         return Observable.fromPromise( promise );
+    }
+    
+    deleteCategory(id):Observable<any> {
+        let promise = this.category.remove(id)
+        return Observable.fromPromise(promise);
+    }
+    
+    configAdd(info):Observable<any> {
+        let promise = this.config.push(info)
+        return Observable.fromPromise(promise);
     }
 }

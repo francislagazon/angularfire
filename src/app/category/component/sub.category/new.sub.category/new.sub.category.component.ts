@@ -30,6 +30,7 @@ export class NewSubCategoryComponent {
         
 
         this.form = fb.group({
+            forumId:            ['0', Validators.required],
             SubcategoryName:    ['', Validators.required],
             description:        ['', Validators.required],
             parent:             ['0', Validators.required]
@@ -37,13 +38,17 @@ export class NewSubCategoryComponent {
 
         this.activatedRoute.params.subscribe((params: Params) => {
             this.forumVar.catId = params['catId'];
+            this.forumVar.forumId = params['forumId'];
+
             console.log(params);
+            
             db.list('/category/'+ this.forumVar.catId )
                 .subscribe(req =>  {
                     for(let uIndex of req) {
                         if(uIndex.$key == "category")   { this.forumVar.name = uIndex.$value; }
                     }
                     this.form.patchValue({
+                        forumId:     this.forumVar.forumId,
                         parent:      this.forumVar.catId
                     })
                 });
@@ -53,6 +58,7 @@ export class NewSubCategoryComponent {
     onSubmit() {
         this.userVar.loading = true;
         let passData = {
+                forumID:            this.form.value.forumId,
                 category:           this.form.value.SubcategoryName,
                 description:        this.form.value.description,
                 parent:             this.form.value.parent
@@ -60,7 +66,7 @@ export class NewSubCategoryComponent {
         this.fData.categorySubAdd(passData)
         .subscribe((success) => {
             this.userVar.loading = false;
-            this.router.navigate(['/category']);
+            this.router.navigate(['/category/'+ this.form.value.forumId + '/'+ this.form.value.parent]);
         }, e =>console.log(e));
     }
 }

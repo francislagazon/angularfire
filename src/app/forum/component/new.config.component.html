@@ -1,8 +1,8 @@
-<form [formGroup]="form">
+<form [formGroup]="form" enctype="multipart/form-data">
     <div class="row">
         <div class="col-md-3"></div>
         <div class="col-md-6">
-            <h6>Category: {{forumVar.name}}</h6>
+            <h3>New Configuration</h3>
             <hr>
         </div>
     </div>
@@ -10,11 +10,24 @@
         <div class="col-md-3"></div>
         <div class="col-md-6">
             <div class="form-group">
-                <label class="sr-only" for="password">Title</label>
+                <label class="sr-only" for="password">Unique Name</label>
                 <div class="input-group mb-2 mr-sm-2 mb-sm-0">
                     <div class="input-group-addon" style="width: 2.6rem"><i class="fa fa-tag"></i></div>
-                    <input type="text" formControlName="SubcategoryName" name="SubcategoryName" class="form-control" id="SubcategoryName"
-                            placeholder="Title" required>
+                    <input type="text" formControlName="uniqueName" name="uniqueName" class="form-control" id="uniqueName"
+                            placeholder="Unique Name" required>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-3"></div>
+        <div class="col-md-6">
+            <div class="form-group">
+                <label class="sr-only" for="password">Name</label>
+                <div class="input-group mb-2 mr-sm-2 mb-sm-0">
+                    <div class="input-group-addon" style="width: 2.6rem"><i class="fa fa-tag"></i></div>
+                    <input type="text" formControlName="configName" name="configName" class="form-control" id="configName"
+                            placeholder="Name" required>
                 </div>
             </div>
         </div>
@@ -35,11 +48,12 @@
     <div class="row" style="padding-top: 1rem">
         <div class="col-md-3"></div>
         <div class="col-md-6">
-            <input type="hidden" formControlName="forumId" name="forumId" class="form-control" id="forumId" required />
-            <input type="hidden" formControlName="parent" name="parent" class="form-control" id="parent" required />
             <button type="submit" class="btn btn-primary" (click)="onSubmit()" [disabled]="!form.valid">
                 <i class="fa fa-plus"></i> Save
             </button>
         </div>
     </div>
 </form>
+<div class="p-a text-center w-100 t-50 mt-3">
+    <i *ngIf="userVar.loading" class="fa fa-spinner fa-spin fa-3x fa-fw"></i>
+</div>

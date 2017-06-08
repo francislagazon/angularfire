@@ -20,7 +20,6 @@
           <li class="text-white p2 d-inline px-2" *ngIf="login"><a routerLink="/profile">Profile</a></li>
           <li class="text-white p2 d-inline px-2" *ngIf="login"> <a (click)="btnLogout()">Logout</a></li>
           <li class="text-white p2 d-inline px-2" *ngIf="!(login)"><a routerLink="/login">Login</a></li>
-          <li class="text-white p2 d-inline px-2" *ngIf="!(login)"><a routerLink="/register">Register</a></li>
       </ul>
       <ng-template #guest>Guest</ng-template>
    </div>
