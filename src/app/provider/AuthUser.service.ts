@@ -1,7 +1,7 @@
-import {Injectable} from '@angular/core'
+import { Injectable } from '@angular/core'
 import { AngularFireDatabase, FirebaseListObservable } from 'angularfire2/database';
+import { AngularFireAuth } from 'angularfire2/auth';
 import * as firebase from 'firebase';
-
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/observable/fromPromise';
@@ -14,7 +14,7 @@ export class UserData {
     loggedin: string;
 
     users: FirebaseListObservable<any>;
-    constructor(db: AngularFireDatabase) {
+    constructor(private db: AngularFireDatabase, private angularFireAuth: AngularFireAuth) {
         this.users = db.list('/users');
     }
     register(email, password):Observable<firebase.User> {
@@ -22,10 +22,22 @@ export class UserData {
         return Observable.fromPromise( promise );
 
     }
+    userloginGoogle():Observable<firebase.User> {
+        let provider = new firebase.auth.GoogleAuthProvider();
+        let promise = firebase.auth().signInWithPopup(provider);
+
+        return Observable.fromPromise( promise );
+    }
+
+    userloginFacebook():Observable<firebase.User> {
+        let provider = new firebase.auth.FacebookAuthProvider();
+        let promise = firebase.auth().signInWithPopup(provider);
+
+        return Observable.fromPromise( promise );
+    }
 
     userLogin(email, password):Observable<firebase.User> {
         let promise = firebase.auth().signInWithEmailAndPassword( email, password );
-        
         return Observable.fromPromise( promise );
 
     }

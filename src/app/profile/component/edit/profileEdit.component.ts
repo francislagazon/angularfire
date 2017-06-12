@@ -78,7 +78,7 @@ export class ProfileEditComponent {
         this.uData.userUpdate(this.form.value.userUID, passData)
         .subscribe((success) => {
             this.userVar.loading = false;
-            this.router.navigate(['/']);
+            this.router.navigate(['/action']);
         }, e =>console.log(e));
     }
 
@@ -87,7 +87,7 @@ export class ProfileEditComponent {
         let file = fileInput.files[0];
 
         let storageRef = firebase.storage().ref();
-        let path = `/${this.userVar.folder}/${file.name}`;
+        let path = `/${this.userVar.folder}/${this.form.value.userUID}/${file.name}`;
         let iRef = storageRef.child(path);
 
         iRef.put(file).then((snapshot) => {

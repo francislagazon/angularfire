@@ -12,6 +12,7 @@ import { UsersComponent } from './../users/users.component'
 export class AdminComponent {
     
     constructor(private uData: UserData, private router: Router) {
+        console.log(uData);
         if(!uData.pageSession) {
             router.navigate(['/login']);
         }

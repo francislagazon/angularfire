@@ -48,7 +48,6 @@ export class NewSubCategoryComponent {
                         if(uIndex.$key == "category")   { this.forumVar.name = uIndex.$value; }
                     }
                     this.form.patchValue({
-                        forumId:     this.forumVar.forumId,
                         parent:      this.forumVar.catId
                     })
                 });

@@ -23,7 +23,7 @@ export class SubCategoryComponent {
 
     form: FormGroup;
     ob : Object = {};
-    
+    fid: string;
 
     constructor(private activatedRoute: ActivatedRoute, fb: FormBuilder, private router: Router, db: AngularFireDatabase, private uData: UserData, private fData: ForumData) {
         if(!uData.pageSession) {
@@ -32,6 +32,7 @@ export class SubCategoryComponent {
             
         this.activatedRoute.params.subscribe((params: Params) => {
             this.forumVar.catId = params['catId'];
+            this.fid = params['forumId'];
 
             db.database.ref().child('category')
             .orderByChild('parent').equalTo(params['catId'])

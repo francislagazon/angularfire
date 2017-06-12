@@ -55,7 +55,12 @@ export class CategoryComponent {
     }
 
     get ObjectKeys() {
-        return Object.keys( this.ob );
+        if(this.ob) {
+            this.forumVar.noResult = false;
+            return Object.keys( this.ob );
+        } else {
+            this.forumVar.noResult = true
+        }
     }
 
 }

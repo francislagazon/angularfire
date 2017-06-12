@@ -24,18 +24,39 @@ export class ForumData {
         return Observable.fromPromise( promise );
     }
 
+    categoryUpdate(key, info):Observable<any> {
+        info = {
+            forumID: info.forumID,
+            category: info.category,
+            description: info.description,
+            parent: info.parent
+        }
+        let promise = this.category.update(key, info)
+        
+        return Observable.fromPromise( promise );
+    }
+
     categorySubAdd(info):Observable<any> {
         let promise = this.category.push(info)
         return Observable.fromPromise( promise );
     }
-    
+
     deleteCategory(id):Observable<any> {
         let promise = this.category.remove(id)
         return Observable.fromPromise(promise);
     }
     
+    deleteForumConfig(id):Observable<any> {
+        let promise = this.config.remove(id)
+        return Observable.fromPromise(promise);
+    }
     configAdd(info):Observable<any> {
         let promise = this.config.push(info)
         return Observable.fromPromise(promise);
+    }
+
+    configUpdate(key, info):Observable<any> {
+        let promise = this.config.update(key, info)
+        return Observable.fromPromise( promise );
     }
 }

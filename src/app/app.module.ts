@@ -26,6 +26,7 @@ import { SubCategoryComponent } from "./category/component/sub.category/sub.cate
 import { NewSubCategoryComponent } from "./category/component/sub.category/new.sub.category/new.sub.category.component";
 
 import { NewConfigComponent } from './forum/component/new.config.component';
+import { EditNewConfigComponent } from './forum/component/edit.config/edit.config.component';
 
 import { ActionComponent } from "./action/action.component";
 
@@ -61,6 +62,7 @@ const appRoutes:Routes = [
   { path: "category/:forumId/:catId",         component: SubCategoryComponent },
   { path: "forum",                            component: ForumComponent },
   { path: "forum/add",                        component: NewConfigComponent },
+  { path: "forum/edit/:forumId",              component: EditNewConfigComponent },
   { path: "action",                           component: ActionComponent }
 ];
 
@@ -85,6 +87,7 @@ const appRoutes:Routes = [
     NewSubCategoryComponent,
     ForumComponent,
     NewConfigComponent,
+    EditNewConfigComponent,
     ActionComponent
   ],
   imports: [

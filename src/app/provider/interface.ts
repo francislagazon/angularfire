@@ -14,7 +14,9 @@ export interface USERS_KEY_FORMAT {
 export interface FORUM_KEY_FORMAT {
     catId: string;
     forumId: string;
+    storageId: string;
     name: string;
+    forumUID: string;
     noResult: boolean;
     categoryName: string;
     description: string;

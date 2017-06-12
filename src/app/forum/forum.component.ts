@@ -11,7 +11,7 @@ import { UserData } from './../provider/AuthUser.service';
 
 import { ForumData } from './../provider/Forum.service'
 
-import { USERS_KEY_FORMAT } from "./../provider/interface";
+import { USERS_KEY_FORMAT, FORUM_KEY_FORMAT } from "./../provider/interface";
 
 @Component({
     selector: 'app-forum',
@@ -20,9 +20,11 @@ import { USERS_KEY_FORMAT } from "./../provider/interface";
 
 export class ForumComponent {
     
+    private forumVar : FORUM_KEY_FORMAT = <FORUM_KEY_FORMAT> {};
+    private userVar:USERS_KEY_FORMAT = <USERS_KEY_FORMAT>{};
     ob : Object = {};
 
-    constructor(private router: Router, db: AngularFireDatabase, private uData: UserData, private f: ForumData) {
+    constructor(private router: Router, db: AngularFireDatabase, private uData: UserData, private fData: ForumData) {
         if(!uData.pageSession) {
             router.navigate(['/login']);
         }
@@ -32,12 +34,18 @@ export class ForumComponent {
                 this.ob = u.val();
             });   
     }
-    
-    
 
     get ObjectKeys() {
         return Object.keys( this.ob );
     }
     
+    catDelete(id) {
+        this.userVar.loading = true;
+        this.fData.deleteForumConfig(id)
+        .subscribe((success) => {
+            this.userVar.loading = false;
+            this.router.navigate(['/action/']);
+        }, e =>console.log(e));
+    }
 
 }

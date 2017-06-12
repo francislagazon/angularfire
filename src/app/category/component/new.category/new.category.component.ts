@@ -39,18 +39,18 @@ export class NewCategoryComponent {
             this.forumVar.forumId = params['forumId'] ? params['forumId'] : null;
             this.forumVar.catId = params['catId'] ? params['catId'] : null;
 
-            
-                db.database.ref().child('category/'+ this.forumVar.catId)
-                .once('value', u => {
-                    console.log(u.val().category);
-                    this.form.patchValue({
-                        forumId:            [u.val().forumID],
-                        categoryName:       [u.val().category],
-                        description:        [u.val().description],
-                        parent:             [u.val().parent]
-                    })
-                });   
-            
+                if(this.forumVar.forumId && this.forumVar.catId) {
+                    db.database.ref().child('category/'+ this.forumVar.catId)
+                    .once('value', u => {
+                        console.log(u.val());
+                        this.form.patchValue({
+                            forumId:            [u.val().forumID],
+                            categoryName:       [u.val().category],
+                            description:        [u.val().description],
+                            parent:             [u.val().parent]
+                        })
+                    });   
+                }
                 this.form.patchValue({
                     forumId:            params['forumId']
                 })
